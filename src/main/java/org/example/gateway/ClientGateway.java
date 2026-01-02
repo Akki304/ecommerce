@@ -1,5 +1,6 @@
 package org.example.gateway;
 import org.example.dto.ProductDto;
+import org.example.exception.ExternalServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -18,12 +19,22 @@ public class ClientGateway
     public ResponseEntity<List<ProductDto>> listOfProducts()
     {
         String uri = "https://fakestoreapi.com/products";
-       return restTemplate.exchange(
-                uri,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<ProductDto>>() {}
-        );
-
+       try {
+           return restTemplate.exchange(
+                   uri,
+                   HttpMethod.GET,
+                   null,
+                   new ParameterizedTypeReference<List<ProductDto>>() {
+                   }
+           );
+       }
+       catch (Exception ex)
+       {
+           throw new ExternalServiceException(
+                   "Failed to fetch products from external API",
+                   ex
+           );
+       }
     }
+
 }
