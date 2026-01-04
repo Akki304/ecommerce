@@ -1,9 +1,12 @@
 package org.example.dto;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
 
-@Data
+@Getter
+@Builder
 public class ProductDto
 {
     private Long id;
@@ -11,6 +14,7 @@ public class ProductDto
     private double price;
     private String description;
     private String category;
+    private String currency;
     private String image;
 
 }

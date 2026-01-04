@@ -9,5 +9,8 @@ import java.util.List;
 
 public interface ProductService
 {
-    ResponseEntity<List<ProductDto>>  getAllProducts();
+    ResponseEntity<String> addProducts(ProductDto product);
+    List<ProductDto> getAllProducts();
+    ResponseEntity<String> deleteProduct(long id);
+    ResponseEntity<String> updateProduct(long id, ProductDto dto);
 }
